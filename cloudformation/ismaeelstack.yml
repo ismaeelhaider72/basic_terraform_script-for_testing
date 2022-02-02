@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  ImageId:
+    Type: String
+  InstanceType:
+    Type: String
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageId
+      InstanceType: !Ref InstanceType
+      Tags:
+        - Key: Name
+          Value: ismaeel-cloudformation-Server    
