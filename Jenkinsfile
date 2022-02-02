@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  tools {terrafrom "Terraform"} 
+  tools {terraform "Terraform"} 
   stages {
         
     stage('Git') {
