@@ -36,10 +36,10 @@ pipeline {
         
         script {
             if (params.autoApprove){
-                echo 'foo is 0'
+                sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"
             }
             else {
-                echo 'foo is 1'
+                echo 'please autoapprove checkbox'
             }
         }
         }
