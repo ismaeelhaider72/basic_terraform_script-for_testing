@@ -40,7 +40,7 @@ pipeline {
 
         stage('Applying terraform') {
         when {
-        expression { params.Desired_Configuration == 'UsingTerraform'}
+        expression { params.autoApprove == true}
         }             
         agent{
             label 'ismaeel_slave_with_terraformPlugin'
