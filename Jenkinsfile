@@ -8,7 +8,14 @@ pipeline {
   string(
       name: 'InstanceType',
       defaultValue: "t2.small",
-      description: 'instance type' )  
+      description: 'instance type' )
+  choice(
+      name: 'Desired_Configuration',
+      choices: "By Terraform\n By CloudFormation",
+      description: 'Terraform / Cloud Formation' )       
+    
+  }    
+    
   }
   tools {terraform "Terraform"} 
   stages {
