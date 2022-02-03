@@ -30,7 +30,7 @@ pipeline {
          sh "echo running Terraform script.............. "
          sh "terraform init"
          sh "terraform plan"        
-         sh "terraform apply -var='imageId=${params.ImageId}' -var='instanceType=${params.InstanceType}' -auto-approve "
+         sh 'terraform apply -var="imageId=${params.ImageId}" -var="instanceType=${params.InstanceType}" -auto-approve'
       }
 
     }
