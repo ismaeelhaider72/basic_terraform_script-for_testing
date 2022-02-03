@@ -44,7 +44,7 @@ pipeline {
             label 'ismaeel_slave_with_terraformPlugin'
         }
         steps {
-            input(message: 'Do you want apply', ok: 'Apply')
+            input(message: 'Do you want to apply', ok: 'Apply')
             sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"       
         }
 
