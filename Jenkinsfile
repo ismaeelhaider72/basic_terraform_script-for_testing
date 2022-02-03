@@ -14,7 +14,7 @@ pipeline {
             label 'ismaeel_slave_with_terraformPlugin'
         }
       steps {
-         sh "echo running Terraform.............. "
+         sh "echo running Terraform script.............. "
          sh "terraform init"
          sh "terraform plan"        
          sh "terraform apply -auto-approve"
