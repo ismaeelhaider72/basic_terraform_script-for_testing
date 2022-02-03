@@ -22,7 +22,13 @@ pipeline {
         }
 
     stages {
-          
+        
+        stage('build user') {
+          steps {
+                sh "BUILD_TRIGGER_BY=$(curl -k --silent ${BUILD_URL}/api/xml | tr '<' '\n' | egrep '^userId>|^userName>' | sed 's/.*>//g' | sed -e '1s/$/ \//g' | tr '\n' ' ')"
+                sh 'echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"'
+          }
+        }          
       
         stage('Planning terraform') {
         when {
