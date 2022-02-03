@@ -66,4 +66,28 @@ pipeline {
       } 
   
     }
+
+   post {
+        success {
+            script{
+                username = "ismaeel"
+                slackSend color: '#AAFF00', message: "Username: ${username}"
+                slackSend color: '#AAFF00', message: "Build Successful - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
+            }
+            }
+        failure {
+            script{
+                username = "ismaeel"
+                slackSend color: '#FF0000', message: "Username: ${username}"
+                slackSend color: '#FF0000', message: "Build failure occured - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
+
+
+            }
+            }
+    
+    
+    }
+
+
+
   }
