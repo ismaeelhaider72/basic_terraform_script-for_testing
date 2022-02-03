@@ -29,7 +29,7 @@ pipeline {
       steps {
          sh "echo running Terraform script.............. "
          sh "terraform init"
-         sh 'terraform plan -var "imageId=${params.ImageId}" ' 
+         sh 'terraform plan -var "imageId=params.ImageId" ' 
       }
 
     }
