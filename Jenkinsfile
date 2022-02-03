@@ -31,6 +31,8 @@ pipeline {
             sh "echo running Terraform script.............. "
             sh "terraform init"
             sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
+            sh "echo '-----------------------------------------------------'"
+            sh "echo ${params.autoApprove}"
             script {
             if("${params.autoApprove}"){
                 stage ('Applying') {
