@@ -34,12 +34,15 @@ pipeline {
             sh "echo '-----------------------------------------------------'"
             sh "echo ${params.autoApprove}"
         }
-      when {
-        expression { params.autoApprove == True}
-        } 
-        steps {
-            sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -input=true -auto-approve"
-        }        
+        script {
+            if (params.autoApprove){
+                echo 'foo is 0'
+            }
+            else {
+                echo 'foo is 1'
+            }
+        }
+      
         }
 
 
