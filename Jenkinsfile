@@ -22,7 +22,7 @@ pipeline {
       
         stage('Running terraform') {
         when {
-        expression { params.Desired_Configuration == 'UsingTerraform' }
+        expression { params.Desired_Configuration == 'UsingTerraform' && equals expected: true, actual: params.autoApprove}
         }        
             agent{
                 label 'ismaeel_slave_with_terraformPlugin'
@@ -36,22 +36,6 @@ pipeline {
         }
 
         }
-
-        stage('Approval') {
-            when {
-                
-                    equals expected: true, actual: params.autoApprove
-                
-            }
-            steps {
-                sh "echo 'in approval section' "
-                sh "ls -la"
-                sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -lock=false-auto-approve "
-            }
-
-
-        }
-
 
 
 
