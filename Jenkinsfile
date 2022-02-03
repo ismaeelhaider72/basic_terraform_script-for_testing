@@ -44,7 +44,9 @@ pipeline {
                 
             }
             steps {
-                sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -input=true -auto-approve -lock=false"
+                sh "echo 'in approval section' "
+                sh "ls -la"
+                sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -lock=false-auto-approve "
             }
 
 
