@@ -29,8 +29,8 @@ pipeline {
             }
         steps {
             sh "echo running Terraform script.............. " 
-            sh "rm -rf .terraform
-            sh "rm -rf .terraform.*
+            sh "rm -rf .terraform"
+            sh "rm -rf .terraform.*"
             sh "rm -rf terraform.tfstate"
             sh "rm -rf terraform.tfstate.backup"
             sh "ls -la"
