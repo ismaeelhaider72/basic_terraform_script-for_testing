@@ -31,8 +31,8 @@ pipeline {
             sh "echo running Terraform script.............. "
             sh "terraform init"
             sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
-            sh "echo 'in running section '"
-            sh "ls -la"
+            sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -input=true -auto-approve -lock=false"
+
         }
 
         }
