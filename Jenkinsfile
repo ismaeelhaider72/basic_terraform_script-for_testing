@@ -20,22 +20,22 @@ pipeline {
     stages {
           
       
-      stage('Running terraform') {
-      when {
+        stage('Running terraform') {
+        when {
         expression { params.Desired_Configuration == 'UsingTerraform' }
-      }        
-          agent{
-              label 'ismaeel_slave_with_terraformPlugin'
-          }
+        }        
+            agent{
+                label 'ismaeel_slave_with_terraformPlugin'
+            }
         steps {
-           sh "echo running Terraform script.............. "
-           sh "terraform init"
-           sh "terraform plan  -input=false  -out tfplan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
-           sh 'terraform show -no-color tfplan > tfplan.txt'
-           sh "ls -la"
+            sh "echo running Terraform script.............. "
+            sh "terraform init"
+            sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
+            sh "echo 'in running section '"
+            sh "ls -la"
         }
-  
-      }
+
+        }
 
         stage('Approval') {
             when {
@@ -43,23 +43,14 @@ pipeline {
                     equals expected: true, actual: params.autoApprove
                 }
             }
-
             steps {
-                script {
-                    def plan = readFile 'tfplan.txt'
-                    input message: "Do you want to apply the plan?",
-                        parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
-                }
+                sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -input=true -auto-approve"
             }
+
+
         }
 
-        stage('Apply') {
-            steps {
-                sh "echo 'in apply secton '"
-                sh "ls -la"
-                sh "terraform apply -input=false tfplan"
-            }
-        }
+
 
 
       stage('Running Cloudformation') {
