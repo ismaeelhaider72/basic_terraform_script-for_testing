@@ -45,7 +45,7 @@ pipeline {
         }
         steps {
             input(message: 'Do you want to apply', ok: 'Apply')
-            sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"       
+            sh "terraform apply -no-color -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"       
         }
 
         }
@@ -70,15 +70,13 @@ pipeline {
    post {
         success {
             script{
-                username = "ismaeel"
-                slackSend color: '#AAFF00', message: "Username: ${username}"
+                slackSend color: '#AAFF00', message: "Username: ${env.BUILD_USER_ID}"
                 slackSend color: '#AAFF00', message: "Build Successful - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
             }
             }
         failure {
             script{
-                username = "ismaeel"
-                slackSend color: '#FF0000', message: "Username: ${username}"
+                slackSend color: '#FF0000', message: "Username: ${env.BUILD_USER_ID}"
                 slackSend color: '#FF0000', message: "Build failure occured - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
 
 
