@@ -44,7 +44,7 @@ pipeline {
                 
             }
             steps {
-                sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -input=true -auto-approve"
+                sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -input=true -auto-approve -lock=false"
             }
 
 
