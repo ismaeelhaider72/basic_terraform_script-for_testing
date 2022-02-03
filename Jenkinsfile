@@ -39,7 +39,7 @@ pipeline {
                 sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"
             }
             else {
-                echo 'please autoapprove checkbox'
+                echo 'In order to apply terrafrom please check autoapprove box'
             }
         }
         }
