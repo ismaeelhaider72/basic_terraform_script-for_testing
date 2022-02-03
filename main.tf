@@ -20,15 +20,13 @@ pipeline {
 
     stages {
           
-        stage("user"){
-            steps{
+       stage('build user') {
+          steps {
             wrap([$class: 'BuildUser']) {
-                def user = env.BUILD_USER_ID
-                }                
+              sh 'echo "${BUILD_USER}"'
+                }
+              }
             }
-        }
-
-
 
         stage('Planning terraform') {
         when {
