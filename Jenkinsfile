@@ -29,8 +29,8 @@ pipeline {
             }
         steps {
             sh "echo running Terraform script.............. "                  
-            sh "terraform init"
-            sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
+            sh "terraform init -no-color "
+            sh "terraform plan -no-color -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
         
         }
       
@@ -45,7 +45,7 @@ pipeline {
         }
         steps {
             input(message: 'Do you want to apply', ok: 'Apply')
-            sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"       
+            sh "terraform apply -no-color -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"       
         }
 
         }
