@@ -39,7 +39,7 @@ pipeline {
       expression { params.Desired_Configuration == 'UsingCloudFormation' }
     }        
         agent{
-            label 'ismaeel_slave1_websocket'
+            label 'ismaeel_slave2'
         }
       steps {
          sh "echo Running CloudFormation script ............."
