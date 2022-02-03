@@ -12,9 +12,7 @@ pipeline {
   choice(
       name: 'Desired_Configuration',
       choices: "By Terraform\n By CloudFormation",
-      description: 'Terraform / Cloud Formation' )       
-    
-  }    
+      description: 'Terraform / Cloud Formation' )          
     
   }
   tools {terraform "Terraform"} 
