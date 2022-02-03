@@ -33,7 +33,7 @@ pipeline {
             sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
             sh "echo '-----------------------------------------------------'"
             sh "echo ${params.autoApprove}"
-            input(message: 'Do you want apply', ok: 'Submit')
+            input(message: 'Do you want apply', ok: 'Apply')
             sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"
         
         }
