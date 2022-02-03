@@ -28,11 +28,7 @@ pipeline {
                 label 'ismaeel_slave_with_terraformPlugin'
             }
         steps {
-            sh "echo running Terraform script.............. "
-            sh "rm -rf terraform.tfstate"
-            sh "rm -rf terraform.tfstate.backup"
-            sh "rm -rf tfplan"
-            sh "rm -rf tfplan.txt"                   
+            sh "echo running Terraform script.............. "                  
             sh "terraform init"
             sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
             sh "echo ' in plan section ------------------------------------------------------------  '  "
