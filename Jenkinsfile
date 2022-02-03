@@ -33,7 +33,7 @@ pipeline {
             sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
             sh "echo '-----------------------------------------------------'"
             sh "echo ${params.autoApprove}"
-        }
+        
         script {
             if (params.autoApprove){
                 echo 'foo is 0'
@@ -41,6 +41,7 @@ pipeline {
             else {
                 echo 'foo is 1'
             }
+        }
         }
       
         }
