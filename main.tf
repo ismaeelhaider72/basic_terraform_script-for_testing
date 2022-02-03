@@ -13,8 +13,8 @@ provider "aws" {
 }
 
 resource "aws_instance" "my_instance" {
-  ami           = "var.imageId"
-  instance_type = "var.instanceType"
+  ami           = "${var.imageId}"
+  instance_type = "${var.instanceType}"
   key_name = "ismaeel_virginia_key"
   vpc_security_group_ids = ["sg-0cd4ec8eb25d1d425",]
   subnet_id = "subnet-0d9e6474140c1f6fc"
