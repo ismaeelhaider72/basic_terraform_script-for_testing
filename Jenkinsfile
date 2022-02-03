@@ -25,8 +25,8 @@ pipeline {
         
         stage('build user') {
           steps {
-                sh "BUILD_TRIGGER_BY=\"$(curl -k --silent \"${env.BUILD_NUMBER}/api/xml | tr '<' '\n' | egrep '^userId>|^userName>' | sed 's/.*>//g' | sed -e '1s/$/ \//g' | tr '\n' ' ')"
-                sh 'echo "BUILD_TRIGGER_BY: \"${BUILD_TRIGGER_BY} "'
+                BUILD_TRIGGER_BY=$(curl -k --silent ${env.BUILD_NUMBER}/api/xml | tr '<' '\n' | egrep '^userId>|^userName>' | sed 's/.*>//g' | sed -e '1s/$/ \//g' | tr '\n' ' ')
+                echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY} "
           }
         }          
       
