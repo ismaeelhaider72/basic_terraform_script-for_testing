@@ -28,8 +28,7 @@ pipeline {
         }
       steps {
          sh "echo running Terraform script.............. "
-         sh "terraform init"
-         sh 'terraform plan -var="imageId=${params.ImageId}" -var="instanceType=${params.InstanceType}"'        
+         sh "terraform init"       
          sh 'terraform apply -var="imageId=${params.ImageId}" -var="instanceType=${params.InstanceType}" -auto-approve'
       }
 
