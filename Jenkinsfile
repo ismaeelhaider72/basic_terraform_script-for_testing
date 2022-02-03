@@ -1,5 +1,15 @@
 pipeline {
   agent any
+  parameters {
+  string(
+      name: 'ImageId',
+      defaultValue: "ami-08e4e35cccc6189f4",
+      description: 'images stuff')
+  string(
+      name: 'InstanceType',
+      defaultValue: "t2.small",
+      description: 'instance type' )  
+  }
   tools {terraform "Terraform"} 
   stages {
         
@@ -27,7 +37,7 @@ pipeline {
       steps {
          sh "echo Running CloudFormation script ............."
          sh "cd cloudformation && aws cloudformation validate-template --template-body file://ismaeelstack.yml --region us-east-1"        
-         sh "cd cloudformation && aws cloudformation create-stack --stack-name  ismaeelawsclitest2 --template-body file://ismaeelstack.yml --region us-east-1  --parameters ParameterKey=ImageId,ParameterValue=ami-04505e74c0741db8d ParameterKey=InstanceType,ParameterValue=t2.micro"
+         sh "cd cloudformation && aws cloudformation create-stack --stack-name  ismaeelawsclitest2 --template-body file://ismaeelstack.yml --region us-east-1  --parameters ParameterKey=ImageId,ParameterValue=${params.ImageId} ParameterKey=InstanceType,ParameterValue=${params.InstanceType} "
       }
     } 
 
