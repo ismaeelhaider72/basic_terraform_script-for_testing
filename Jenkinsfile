@@ -8,17 +8,17 @@ pipeline {
   string(
       name: 'InstanceType',
       defaultValue: "t2.small",
-      description: 'instance type' )  
+      description: 'instance type' )
+  choice(
+      name: 'Desired_Configuration',
+      choices: "By Terraform\n By CloudFormation",
+      description: 'Terraform / Cloud Formation' )       
+    
   }
   tools {terraform "Terraform"} 
   stages {
         
-    stage('Git') {
-      steps {
-        git branch: 'main', url: 'https://github.com/ismaeelhaider72/basic_terraform_script-for_testing.git'
-      }
-    }
-     
+    if("${params.Desired_Configuration}"=="By Terraform" ){ 
     stage('Running terraform') {
         agent{
             label 'ismaeel_slave_with_terraformPlugin'
@@ -30,6 +30,8 @@ pipeline {
          sh "terraform apply -auto-approve"
       }
     }  
+    }
+    else {
     stage('Running Cloudformation') {
         agent{
             label 'ismaeel_slave1_websocket'
@@ -41,6 +43,6 @@ pipeline {
       }
     } 
 
-
+  }
   }
 }
