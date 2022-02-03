@@ -11,7 +11,7 @@ pipeline {
       description: 'instance type' )
   choice(
       name: 'Desired_Configuration',
-      choices: "By Terraform\nBy CloudFormation",
+      choices: "By Terraform\n By CloudFormation",
       description: 'Terraform / Cloud Formation' )       
     
   }
