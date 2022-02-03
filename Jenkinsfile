@@ -33,17 +33,9 @@ pipeline {
             sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
             sh "echo '-----------------------------------------------------'"
             sh "echo ${params.autoApprove}"
+            input(message: 'Do you want apply', ok: 'Submit')
+            sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"
         
-        script {
-            input message: "Do you want to apply the plan?",
-            parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: 'no')]            
-            if (params.Plan == 'yes'){
-                sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -auto-approve -lock=false"
-            }
-            else {
-                echo 'In order to apply terrafrom please check autoapprove box'
-            }
-        }
         }
       
         }
