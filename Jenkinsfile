@@ -30,7 +30,8 @@ pipeline {
         steps {
            sh "echo running Terraform script.............. "
            sh "terraform init"
-           sh "terraform plan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
+           sh "terraform plan  -input=false  -out tfplan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
+           sh 'terraform show -no-color tfplan > tfplan.txt'
         }
   
       }
@@ -44,15 +45,16 @@ pipeline {
 
             steps {
                 script {
+                    def plan = readFile 'tfplan.txt'
                     input message: "Do you want to apply the plan?",
-                        parameters: [text(name: 'Plan', description: 'Please review the plan')]
+                        parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
             }
         }
 
         stage('Apply') {
             steps {
-                sh "terraform apply -input=false ar imageId=${params.ImageId}  -var instanceType=${params.InstanceType}"
+                sh "terraform apply -input=false tfplan"
             }
         }
 
