@@ -32,6 +32,7 @@ pipeline {
            sh "terraform init"
            sh "terraform plan  -input=false  -out tfplan -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
            sh 'terraform show -no-color tfplan > tfplan.txt'
+           sh "ls -la"
         }
   
       }
@@ -54,6 +55,8 @@ pipeline {
 
         stage('Apply') {
             steps {
+                sh "echo 'in apply secton '"
+                sh "ls -la"
                 sh "terraform apply -input=false tfplan"
             }
         }
