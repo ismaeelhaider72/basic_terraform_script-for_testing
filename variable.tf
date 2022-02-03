@@ -1,7 +1,7 @@
-variable "ImageId" {
+variable "imageId" {
     type = string
   }
 
-variable "InstanceType" {
+variable "instanceType" {
     type = string
   }
