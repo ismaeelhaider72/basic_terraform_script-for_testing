@@ -39,9 +39,9 @@ pipeline {
 
         stage('Approval') {
             when {
-                {
+                
                     equals expected: true, actual: params.autoApprove
-                }
+                
             }
             steps {
                 sh "terraform apply -var imageId=${params.ImageId}  -var instanceType=${params.InstanceType} -input=true -auto-approve"
