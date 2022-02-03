@@ -11,15 +11,18 @@ pipeline {
       description: 'instance type' )
   choice(
       name: 'Desired_Configuration',
-      choices: "By Terraform\n By CloudFormation",
+      choices: "UsingTerraform\nUsingCloudFormation",
       description: 'Terraform / Cloud Formation' )       
     
   }
   tools {terraform "Terraform"} 
   stages {
         
-    if("${params.Desired_Configuration}"=="By Terraform" ){ 
+    
     stage('Running terraform') {
+    when {
+      expression { params.Desired_Configuration == 'UsingTerraform' }
+    }        
         agent{
             label 'ismaeel_slave_with_terraformPlugin'
         }
@@ -29,10 +32,12 @@ pipeline {
          sh "terraform plan"        
          sh "terraform apply -auto-approve"
       }
-    }  
+
     }
-    else {
     stage('Running Cloudformation') {
+    when {
+      expression { params.Desired_Configuration == 'UsingCloudFormation' }
+    }        
         agent{
             label 'ismaeel_slave1_websocket'
         }
@@ -43,6 +48,5 @@ pipeline {
       }
     } 
 
-  }
   }
 }
