@@ -70,8 +70,8 @@ pipeline {
           }
         steps {
            sh "echo Running CloudFormation script ............."
-           sh "cd cloudformation && aws cloudformation validate-template --template-body file://ismaeelstack.yml --region us-east-1"        
-           sh "cd cloudformation && aws cloudformation create-stack --stack-name  ismaeelawsclitest2 --template-body file://ismaeelstack.yml --region us-east-1  --parameters ParameterKey=ImageId,ParameterValue=${params.ImageId} ParameterKey=InstanceType,ParameterValue=${params.InstanceType} "
+           sh "cd cloudformation && aws cloudformation validate-template --template-body file://ismaeelstack.yml --region us-east-1"
+           createstack(ImageId:"${params.ImageId}",InstanceType:"${params.InstanceType}") 
         }
       } 
   
