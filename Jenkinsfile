@@ -9,7 +9,7 @@ pipeline {
     string(
         name: 'InstanceType',
         defaultValue: "t2.micro",
-        description: 'instance type' )
+        description: 'instances type' )
     choice(
         name: 'Desired_Configuration',
         choices: "UsingTerraform\nUsingCloudFormation",
