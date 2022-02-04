@@ -1,3 +1,4 @@
+@Library("shared-library")
 pipeline {
     agent any
     parameters {
@@ -37,7 +38,8 @@ pipeline {
                 label 'ismaeel-slave11'
             }
         steps {
-            sh "echo running Terraform script.............. "                  
+            sh "echo running Terraform script.............. "
+            helloWorld(dayOfWeek:"Friday",name:"Ismaeel haider")
             sh "terraform init"
             sh "terraform plan -no-color -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
         
