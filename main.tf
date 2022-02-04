@@ -21,6 +21,6 @@ resource "aws_instance" "my_instance" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "Ismaeel-terraformPlugin-instance-test"
+    Name = "Ismaeel-terraformPlugin-instance-test1"
   }
 }
