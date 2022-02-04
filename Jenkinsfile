@@ -81,7 +81,8 @@ pipeline {
         success {
             script{
                 slackSend  message: "Build ${BUILD_TRIGGER_BY}"
-                slackSend  message: "Build Successful - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
+                slackSend message: "<strong>Build Successful </strong><blockquote><strong>Job Name:${env.JOB_NAME}</strong></blockquote><blockquote>Build Number:${env.BUILD_NUMBER}</blockquote>"
+                
             }
             }
         failure {
