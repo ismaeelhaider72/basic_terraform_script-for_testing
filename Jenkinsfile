@@ -4,7 +4,7 @@ pipeline {
     parameters {
     string(
         name: 'ImageId',
-        defaultValue: "ami-08e4e35cccc6189f4dd",
+        defaultValue: "ami-08e4e35cccc6189f4ddd",
         description: 'images stuff')
     string(
         name: 'InstanceType',
