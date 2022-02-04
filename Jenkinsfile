@@ -50,7 +50,7 @@ pipeline {
         expression { params.autoApprove == true}
         }             
         agent{
-            label 'ismaeel_slave_with_terraformPlugin'
+            label 'ismaeel-slave11'
         }
         steps {
             input(message: 'Do you want to apply', ok: 'Apply')
