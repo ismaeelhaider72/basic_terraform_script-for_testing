@@ -39,9 +39,8 @@ pipeline {
             }
         steps {
             sh "echo running Terraform script.............. "
-            plan(dayOfWeek:"Friday",name:"Ismaeel haider")
             sh "terraform init"
-            sh "terraform plan -no-color -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
+            plan(ImageId:"${params.ImageId}",InstanceType:"${params.InstanceType}")
         
         }
       
