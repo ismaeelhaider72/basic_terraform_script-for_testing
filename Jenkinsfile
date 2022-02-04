@@ -40,8 +40,9 @@ pipeline {
         steps {
             sh "echo running Terraform script.............. "
             sh "terraform init"
+            script{
             terraform.call1(ImageId:"${params.ImageId}",InstanceType:"${params.InstanceType}")
-        
+            }
         }
       
         }
@@ -55,9 +56,10 @@ pipeline {
         }
         steps {
             input(message: 'Do you want to apply', ok: 'Apply')
+            script{
             terraform.call2(ImageId:"${params.ImageId}",InstanceType:"${params.InstanceType}")       
-        }
-
+            }
+         }
         }
 
 
