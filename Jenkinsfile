@@ -17,9 +17,9 @@ pipeline {
       
     }
     tools {terraform "Terraform"} 
+
     stages {
           
-      
         stage('Planning terraform') {
         when {
         expression { params.Desired_Configuration == 'UsingTerraform'}
@@ -28,8 +28,8 @@ pipeline {
                 label 'ismaeel_slave_with_terraformPlugin'
             }
         steps {
-            sh "echo running Terraform script.............. " 
-            sh "terraform init -no-color "
+            sh "echo running Terraform script.............. "                  
+            sh "terraform init"
             sh "terraform plan -no-color -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
         
         }
@@ -66,4 +66,27 @@ pipeline {
       } 
   
     }
+
+   post {
+
+        success {
+            script{
+                slackSend color: '#AAFF00', message: "Username: ${user}"
+                slackSend color: '#AAFF00', message: "Build Successful - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
+            }
+            }
+        failure {
+            script{
+                slackSend color: '#FF0000', message: "Username: ${user}"
+                slackSend color: '#FF0000', message: "Build failure occured - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
+
+
+            }
+            }
+    
+    
+    }
+
+
+
   }
