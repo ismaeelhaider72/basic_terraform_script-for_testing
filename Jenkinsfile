@@ -8,7 +8,7 @@ pipeline {
         description: 'images stuff')
     string(
         name: 'InstanceType',
-        defaultValue: "t2.small",
+        defaultValue: "t2.micro",
         description: 'instance type' )
     choice(
         name: 'Desired_Configuration',
