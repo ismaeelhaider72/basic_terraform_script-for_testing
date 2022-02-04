@@ -37,7 +37,7 @@ pipeline {
                 label 'ismaeel-slave11'
             }
         steps {
-            sh "echo running Terraform script.............. "                  
+            sh "echo running Terraform scripting.............. "                  
             sh "terraform init"
             sh "terraform plan -no-color -var imageId=${params.ImageId} -var instanceType=${params.InstanceType}"
         
