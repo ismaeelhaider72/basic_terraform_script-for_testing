@@ -34,7 +34,7 @@ pipeline {
         expression { params.Desired_Configuration == 'UsingTerraform'}
         }        
             agent{
-                label 'ismaeel_slave_with_terraformPlugin'
+                label 'ismaeel-slave11'
             }
         steps {
             sh "echo running Terraform script.............. "                  
@@ -65,7 +65,7 @@ pipeline {
         expression { params.Desired_Configuration == 'UsingCloudFormation' }
       }        
           agent{
-              label 'ismaeel_slave2'
+              label 'ismaeel-slave22'
           }
         steps {
            sh "echo Running CloudFormation script ............."
