@@ -23,7 +23,7 @@ pipeline {
         stage('build user') {
               steps {
                   script {
-                    BUILD_TRIGGER_BY = "${currentBuild.getBuildCauses()[0].shortDescription}"
+                    BUILD_TRIGGER_BY = "${currentBuild.getBuildCauses()[0].userId}"
                     echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"           
               }
               }
@@ -80,13 +80,13 @@ pipeline {
 
         success {
             script{
-                slackSend color: '#AAFF00', message: "Username:  ${BUILD_TRIGGER_BY}"
+                slackSend color: '#AAFF00', message: "Build Started by:  ${BUILD_TRIGGER_BY}"
                 slackSend color: '#AAFF00', message: "Build Successful - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
             }
             }
         failure {
             script{
-                slackSend color: '#FF0000', message: "Username:  ${BUILD_TRIGGER_BY}"
+                slackSend color: '#FF0000', message: "Build Started by:  ${BUILD_TRIGGER_BY}"
                 slackSend color: '#FF0000', message: "Build failure occured - Job Name:${env.JOB_NAME}  Build Number:${env.BUILD_NUMBER}  Build URL:(<${env.BUILD_URL}|Open>)"
 
 
